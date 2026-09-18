@@ -1,595 +1,403 @@
-# AWS CI/CD ML Project
+# Student Exam Performance Predictor
 
-An end-to-end Machine Learning project with a Flask web application, Docker containerization, GitHub-based source control, and AWS deployment.
+### End-to-End Machine Learning Application | Flask | Docker | AWS EC2
 
-The project demonstrates how to develop, package, containerize, and deploy a Machine Learning application using modern MLOps and CI/CD practices.
+An end-to-end Machine Learning application that predicts student mathematics performance using demographic and academic features. The project demonstrates the complete workflow from **data preprocessing and model training to Flask-based inference, Docker containerization, and AWS EC2 deployment**.
 
 ---
 
-## 🚀 Project Overview
+## 🌐 Live Application
 
-This project implements a complete Machine Learning workflow:
+### [🚀 Open Student Exam Performance Predictor](http://13.51.195.253:8080/)
+
+> Deployed on AWS EC2 Ubuntu and running inside a Docker container.
+
+---
+
+## 📌 Overview
+
+The **Student Exam Performance Predictor** is a web-based Machine Learning application designed to predict a student's mathematics score based on demographic and academic information.
+
+### Input Features
+
+* Gender
+* Race/Ethnicity
+* Parental Level of Education
+* Lunch Type
+* Test Preparation Course
+* Reading Score
+* Writing Score
+
+### Output
+
+The trained Machine Learning model predicts the student's:
+
+**Mathematics Score**
+
+---
+
+## 🏗️ System Architecture
 
 ```text
-Data
-  ↓
-Data Ingestion
-  ↓
-Data Transformation
-  ↓
-Model Training
-  ↓
-Model Evaluation
-  ↓
-Model Saving
-  ↓
-Flask Web Application
-  ↓
-Docker Container
-  ↓
-AWS EC2 Deployment
+                         ┌──────────────────┐
+                         │     Dataset      │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │  Data Ingestion  │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                       ┌─────────────────────┐
+                       │ Data Transformation │
+                       │                     │
+                       │ • Imputation        │
+                       │ • Scaling           │
+                       │ • Encoding          │
+                       └────────┬────────────┘
+                                │
+                                ▼
+                       ┌─────────────────────┐
+                       │ Model Training &    │
+                       │ Evaluation          │
+                       └────────┬────────────┘
+                                │
+                                ▼
+                    ┌──────────────────────────┐
+                    │    Serialized Models     │
+                    │                          │
+                    │       model.pkl          │
+                    │    preprocessor.pkl      │
+                    └────────────┬─────────────┘
+                                 │
+                                 ▼
+                         ┌──────────────────┐
+                         │   Flask Web App  │
+                         │      app.py      │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │ Docker Container │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │     AWS EC2      │
+                         │      Ubuntu      │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │    Web Browser   │
+                         │    Port 8080     │
+                         └──────────────────┘
 ```
-
-The trained ML model is integrated with a Flask application that provides predictions through a web interface.
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technology Stack
 
-### Programming & ML
+### Programming & Machine Learning
 
-* Python 3.10
-* Pandas
-* NumPy
-* Scikit-learn
-* CatBoost
-* XGBoost
-* Seaborn
-* Matplotlib
-* Dill
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=python" width="50" alt="Python"/>
+  <img src="https://skillicons.dev/icons?i=numpy" width="50" alt="NumPy"/>
+  <img src="https://skillicons.dev/icons?i=pandas" width="50" alt="Pandas"/>
+  <img src="https://skillicons.dev/icons?i=sklearn" width="50" alt="Scikit-learn"/>
+</p>
+
+**Python · NumPy · Pandas · Scikit-learn · CatBoost · XGBoost**
 
 ### Web Development
 
-* Flask
-* HTML
-* CSS
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=flask" width="50" alt="Flask"/>
+  <img src="https://skillicons.dev/icons?i=html" width="50" alt="HTML"/>
+  <img src="https://skillicons.dev/icons?i=bootstrap" width="50" alt="Bootstrap"/>
+</p>
 
-### DevOps & Deployment
+**Flask · HTML · Bootstrap · Jinja2**
 
-* Git
-* GitHub
-* Docker
-* AWS EC2
-* AWS CLI
-* CI/CD
+### Data Visualization
 
----
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=matplotlib" width="50" alt="Matplotlib"/>
+</p>
 
-## 📁 Project Structure
+**Matplotlib · Seaborn**
 
-```text
-AWS-CI-CD-project/
-│
-├── app.py
-├── requirements.txt
-├── setup.py
-├── Dockerfile
-├── .dockerignore
-├── .gitignore
-├── LICENSE
-│
-├── src/
-│   ├── components/
-│   ├── pipeline/
-│   ├── exception.py
-│   ├── logger.py
-│   └── utils.py
-│
-├── artifacts/
-│   ├── model.pkl
-│   └── preprocessor.pkl
-│
-├── templates/
-│   └── index.html
-│
-└── notebook/
-    └── ...
-```
+### Deployment & DevOps
 
-> `notebook/`, `LICENSE`, `.env`, virtual environments, Python cache files, and other unnecessary files can be excluded from the Docker build using `.dockerignore`.
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=docker" width="50" alt="Docker"/>
+  <img src="https://skillicons.dev/icons?i=aws" width="50" alt="AWS"/>
+  <img src="https://skillicons.dev/icons?i=linux" width="50" alt="Linux"/>
+</p>
+
+**Docker · AWS EC2 · Ubuntu Linux**
+
+### Development & Version Control
+
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=git" width="50" alt="Git"/>
+  <img src="https://skillicons.dev/icons?i=github" width="50" alt="GitHub"/>
+  <img src="https://skillicons.dev/icons?i=vscode" width="50" alt="VS Code"/>
+  <img src="https://skillicons.dev/icons?i=jupyter" width="50" alt="Jupyter"/>
+</p>
+
+**Git · GitHub · VS Code · Jupyter Notebook**
 
 ---
 
-# ⚙️ Local Setup
-
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/bharat-02/AWS-CI-CD-project.git
-```
-
-Move into the project directory:
-
-```bash
-cd AWS-CI-CD-project
-```
-
----
-
-## 2. Create a Virtual Environment
-
-### Windows
-
-```bash
-python -m venv venv
-```
-
-Activate it:
-
-```bash
-venv\Scripts\activate
-```
-
-### Linux / Ubuntu
-
-```bash
-python3 -m venv venv
-```
-
-Activate it:
-
-```bash
-source venv/bin/activate
-```
-
----
-
-## 3. Install Dependencies
-
-```bash
-pip install --upgrade pip
-```
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 4. Run the Flask Application
-
-The application runs on port **8080**.
-
-```bash
-python app.py
-```
-
-The Flask application should start on:
-
-```text
-http://127.0.0.1:8080
-```
-
-For access from another machine/server, the application is configured to listen on:
-
-```text
-0.0.0.0:8080
-```
-
----
-
-# 🐳 Docker Deployment
-
-Docker is used to package the Flask application and its dependencies into a portable container.
-
-## 1. Build Docker Image
-
-From the project root:
-
-```bash
-docker build -t aws-ci-cd-ml-app .
-```
-
----
-
-## 2. Run Docker Container
-
-```bash
-docker run -d \
-  --name aws-ci-cd-ml-app \
-  -p 8080:8080 \
-  aws-ci-cd-ml-app
-```
-
-Check the running container:
-
-```bash
-docker ps
-```
-
----
-
-## 3. View Container Logs
-
-```bash
-docker logs aws-ci-cd-ml-app
-```
-
-To follow the logs:
-
-```bash
-docker logs -f aws-ci-cd-ml-app
-```
-
----
-
-## 4. Test the Application
-
-Open:
-
-```text
-http://localhost:8080
-```
-
-When deployed to an AWS EC2 instance:
-
-```text
-http://<EC2-PUBLIC-IP>:8080
-```
-
----
-
-# 🐳 Dockerfile
-
-The application uses a Python 3.10 slim image.
-
-The Docker image:
-
-1. Creates the `/app` working directory.
-2. Installs required Linux packages.
-3. Installs Python dependencies.
-4. Copies the application source code.
-5. Exposes port `8080`.
-6. Starts the Flask application.
-
-The container starts the application using:
-
-```dockerfile
-CMD ["python", "app.py"]
-```
-
----
-
-# 🚫 Docker Ignore
-
-The `.dockerignore` file prevents unnecessary files from being copied into the Docker image.
-
-Example:
-
-```text
-.git
-.gitignore
-.env
-*.env
-__pycache__
-*.pyc
-*.pyo
-.venv
-venv
-env
-data
-mentor-docs
-notebook
-LICENSE
-```
-
-This helps reduce the Docker build context and prevents sensitive files such as `.env` from being included in the image.
-
----
-
-# ☁️ AWS EC2 Deployment
-
-The application can be deployed on an AWS EC2 Ubuntu instance using Docker.
-
-## 1. Connect to EC2
-
-Using SSH:
-
-```bash
-ssh -i <your-key.pem> ubuntu@<EC2-PUBLIC-IP>
-```
-
----
-
-## 2. Update Ubuntu
-
-```bash
-sudo apt update
-sudo apt upgrade -y
-```
-
----
-
-## 3. Install Required Packages
-
-```bash
-sudo apt install -y ca-certificates curl git nano
-```
-
-Create the Docker keyring directory:
-
-```bash
-sudo install -m 0755 -d /etc/apt/keyrings
-```
-
-Download Docker's GPG key:
-
-```bash
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-  -o /etc/apt/keyrings/docker.asc
-```
-
----
-
-## 4. Install Docker
-
-After configuring the Docker repository, install Docker Engine and its related packages.
-
-Verify Docker:
-
-```bash
-docker --version
-```
-
-Check Docker service:
-
-```bash
-sudo systemctl status docker
-```
-
----
-
-# 🔄 CI/CD Workflow
-
-The project follows a basic CI/CD workflow:
-
-```text
-Developer
-    ↓
-GitHub Repository
-    ↓
-Code Change
-    ↓
-CI/CD Pipeline
-    ↓
-Build Docker Image
-    ↓
-Deploy Application
-    ↓
-AWS EC2
-    ↓
-Flask Application
-```
-
-Whenever changes are pushed to the repository, the CI/CD workflow can be used to automate application deployment.
-
----
-
-# 🔐 Environment Variables
-
-Sensitive configuration should **not** be stored directly in the source code.
-
-Create a `.env` file when required:
-
-```text
-KEY=value
-```
-
-The `.env` file should remain outside Git and Docker images.
-
-Make sure `.env` is included in:
-
-```text
-.dockerignore
-```
-
-and:
-
-```text
-.gitignore
-```
-
----
-
-# 🧪 Testing Docker Deployment
-
-After starting the container:
-
-```bash
-docker ps
-```
-
-Check the application logs:
-
-```bash
-docker logs aws-ci-cd-ml-app
-```
-
-Test locally on the EC2 server:
-
-```bash
-curl http://localhost:8080
-```
-
-If the application works locally but cannot be accessed from the internet, check the AWS EC2 Security Group.
-
----
-
-# 🔥 AWS Security Group
-
-For external access to the Flask application, add an inbound rule for TCP port `8080`.
-
-Example:
-
-```text
-Type: Custom TCP
-Port: 8080
-Source: 0.0.0.0/0
-```
-
-For production environments, restrict the source IP range where appropriate.
-
-After configuring the Security Group, access the application using:
-
-```text
-http://<EC2-PUBLIC-IP>:8080
-```
-
----
-
-# 🧹 Useful Docker Commands
-
-### List Docker images
-
-```bash
-docker images
-```
-
-### List running containers
-
-```bash
-docker ps
-```
-
-### List all containers
-
-```bash
-docker ps -a
-```
-
-### Stop container
-
-```bash
-docker stop aws-ci-cd-ml-app
-```
-
-### Start container
-
-```bash
-docker start aws-ci-cd-ml-app
-```
-
-### Remove container
-
-```bash
-docker rm aws-ci-cd-ml-app
-```
-
-### Remove image
-
-```bash
-docker rmi aws-ci-cd-ml-app
-```
-
-### Rebuild image
-
-```bash
-docker build --no-cache -t aws-ci-cd-ml-app .
-```
-
----
-
-# 📊 Machine Learning Workflow
-
-The ML pipeline follows these major stages:
+## 🔄 Machine Learning Workflow
 
 ### 1. Data Ingestion
 
-The dataset is loaded and divided into training and testing data.
+The dataset is loaded and divided into training and testing datasets.
 
 ### 2. Data Transformation
 
-Data preprocessing is performed using techniques such as:
+Separate preprocessing pipelines are applied to numerical and categorical features.
 
-* Missing value handling
-* Feature scaling
-* Categorical feature encoding
+**Numerical Pipeline**
+
+```text
+Missing Values
+      ↓
+Median Imputation
+      ↓
+Standard Scaling
+```
+
+**Categorical Pipeline**
+
+```text
+Missing Values
+      ↓
+Categorical Encoding
+      ↓
+One-Hot Encoding
+```
 
 ### 3. Model Training
 
-Multiple Machine Learning algorithms can be trained and evaluated.
-
-Examples include:
+Multiple regression algorithms are evaluated:
 
 * Linear Regression
 * Decision Tree
 * Random Forest
 * K-Nearest Neighbors
-* Gradient Boosting
 * AdaBoost
+* Gradient Boosting
 * CatBoost
 * XGBoost
 
-### 4. Model Evaluation
+### 4. Model Serialization
 
-The trained models are evaluated using appropriate regression metrics.
+The trained model and preprocessing pipeline are stored for inference:
 
-### 5. Model Serialization
+```text
+artifacts/
+├── model.pkl
+└── preprocessor.pkl
+```
 
-The trained model and preprocessing objects are saved using `dill`.
+### 5. Prediction
 
-### 6. Flask Integration
-
-The saved model is loaded by the Flask application and used to generate predictions.
-
----
-
-# 🎯 Project Goals
-
-The main goals of this project are:
-
-* Build an end-to-end Machine Learning pipeline.
-* Create a Flask-based prediction application.
-* Containerize the application using Docker.
-* Deploy the application on AWS EC2.
-* Implement GitHub-based version control.
-* Establish a CI/CD-oriented deployment workflow.
-* Practice real-world MLOps concepts.
+The Flask application loads the serialized model and generates a mathematics score prediction from user input.
 
 ---
 
-# 🔮 Future Improvements
+## 📂 Project Structure
 
-Possible improvements include:
+```text
+AWS-CI-CD-project/
+│
+├── artifacts/
+│   ├── model.pkl
+│   └── preprocessor.pkl
+│
+├── notebook/
+│
+├── src/
+│   ├── components/
+│   │   ├── data_ingestion.py
+│   │   ├── data_transformation.py
+│   │   └── model_trainer.py
+│   │
+│   ├── pipeline/
+│   │
+│   ├── exception.py
+│   ├── logger.py
+│   └── utils.py
+│
+├── templates/
+│   ├── index.html
+│   └── home.html
+│
+├── app.py
+├── Dockerfile
+├── requirements.txt
+├── setup.py
+├── .gitignore
+├── LICENSE
+└── README.md
+```
 
-* Automated model retraining
+---
+
+## 🐳 Docker Deployment
+
+### Build Docker Image
+
+```bash
+docker build -t fde-project-2:latest .
+```
+
+### Run Container
+
+```bash
+docker run -d \
+  --name fde-project-2 \
+  --restart unless-stopped \
+  --env-file /home/ubuntu/.env \
+  -p 8080:8080 \
+  fde-project-2:latest
+```
+
+### Check Container
+
+```bash
+docker ps
+```
+
+### View Logs
+
+```bash
+docker logs --tail 100 fde-project-2
+```
+
+---
+
+## ☁️ AWS EC2 Deployment
+
+The application is deployed on an AWS EC2 Ubuntu server using Docker.
+
+### Deployment Configuration
+
+| Component        | Configuration |
+| ---------------- | ------------- |
+| Cloud Provider   | AWS           |
+| Compute Service  | EC2           |
+| Operating System | Ubuntu        |
+| Application      | Flask         |
+| Containerization | Docker        |
+| Application Port | `8080`        |
+
+### Verify Deployment
+
+Run on the EC2 instance:
+
+```bash
+curl http://localhost:8080/
+```
+
+Expected response:
+
+```text
+HTTP/1.1 200 OK
+```
+
+### Public Endpoint
+
+```text
+http://13.51.195.253:8080/
+```
+
+> The current public IP belongs to the EC2 instance and may change if the instance is stopped and restarted. For a permanent URL, an Elastic IP or domain name should be used.
+
+---
+
+## 🔗 Application Endpoints
+
+| Endpoint       | Description                         |
+| -------------- | ----------------------------------- |
+| `/`            | Application landing page            |
+| `/predictdata` | Student performance prediction page |
+
+---
+
+## 🔐 Security
+
+Sensitive credentials and configuration values are kept outside the Git repository.
+
+The EC2 deployment uses:
+
+```text
+/home/ubuntu/.env
+```
+
+The following types of information should never be committed to GitHub:
+
+* AWS credentials
+* API keys
+* Passwords
+* Secret tokens
+* Private configuration
+
+The `.env` file is excluded using `.gitignore`.
+
+---
+
+## 📈 Key Features
+
+* End-to-end Machine Learning pipeline
+* Automated data preprocessing
+* Multiple regression model evaluation
+* Serialized model and preprocessing pipeline
+* Flask-based prediction interface
+* Docker containerization
+* AWS EC2 deployment
+* Linux server deployment
+* Git and GitHub version control
+
+---
+
+## 🔮 Future Improvements
+
+* Automated CI/CD pipeline
+* Unit and integration testing
 * Model monitoring
-* Automated testing
-* Docker image versioning
-* AWS ECR integration
-* AWS CodePipeline automation
-* AWS CodeBuild integration
-* HTTPS using a domain and reverse proxy
-* Application monitoring and logging
-* CloudWatch integration
-* Production WSGI server such as Gunicorn
+* Structured application logging
+* HTTPS configuration
+* Custom domain
+* AWS Elastic IP
+* Production-grade reverse proxy
+* Improved frontend design
+* Input validation and error handling
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
-**Bharat Kumar**
+### Bharat Kumar
 
-GitHub:
+**Machine Learning Developer | Python | AI**
 
-https://github.com/bharat-02
+<p align="left">
+  <a href="https://github.com/bharat-02">
+    <img src="https://skillicons.dev/icons?i=github" width="45" alt="GitHub"/>
+  </a>
+</p>
 
-Project Repository:
+**GitHub:** [bharat-02](https://github.com/bharat-02)
 
-https://github.com/bharat-02/AWS-CI-CD-project
+**Project Repository:** [AWS-CI-CD-project](https://github.com/bharat-02/AWS-CI-CD-project)
 
 ---
 
-# 📜 License
+## 📄 License
 
-This project is licensed under the terms specified in the `LICENSE` file.
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
